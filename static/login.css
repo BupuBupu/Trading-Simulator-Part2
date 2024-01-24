@@ -1,0 +1,18 @@
+#Login_section{
+    margin-top: 10%;
+    overflow-y: hidden;
+}
+body{
+    background-color: rgb(20, 34, 228);
+}
+#login_right_comp{
+    /* background-color: violet; */
+    height: 30rem;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    width: 22rem;
+    border-radius: 1rem;
+    backdrop-filter: saturate(180%) blur(10px);
+    background-color: rgba(255, 255, 255, 0.5);
+}
