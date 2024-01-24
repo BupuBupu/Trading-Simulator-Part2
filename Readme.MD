@@ -25,14 +25,3 @@ To launch the web application, run:
 
 Upon running the command, the Flask server will start, and the application should be accessible through a web browser at `http://localhost:5000` or the designated port displayed in your terminal.
 
-
-## Screenshots
-
-### Registration Page
-![Registration Page](Screenshot/Registration.png)
-
-### Login Page
-![Login Page](Screenshot/Login.png)
-
-### Dashboard
-![Dashboard](Screenshot/Dashboard.png)
