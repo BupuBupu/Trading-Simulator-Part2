@@ -189,11 +189,19 @@ nav a {
 
 /* Add this CSS rule to style the checkbox */
 #sidebar a input[type="checkbox"] {
-    display: none;
+    display: inline-block;
+    width: 20px;
+      height: 20px;
+      border: 2px solid #3498db;
+      border-radius: 3px;
+      outline: none;
+      cursor: pointer;
+      margin-right: 5px;
 }
 
 #sidebar a input[type="checkbox"]:checked+.checkmark {
     display: block;
+    background-color: #333;
 }
 .sidebar-title{
     color: white;

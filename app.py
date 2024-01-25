@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 import pandas as pd
+from flask_migrate import Migrate
 app = Flask(__name__)
 app.secret_key = 'rwewerwf#3243@2d'  # Replace with your actual secret key
 
@@ -9,12 +10,13 @@ app.secret_key = 'rwewerwf#3243@2d'  # Replace with your actual secret key
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
-
+migrate = Migrate(app, db)
 # User Model
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), unique=True, nullable=False)
     password_hash = db.Column(db.String(200), nullable=False)
+    selected_options = db.Column(db.String(255))
 
 # Initialize Database within Application Context
 with app.app_context():
@@ -67,8 +69,15 @@ def dashboard():
         Company_Name = list(df['Company Name'])
         Symbol = list(df['Symbol'])
         company_list = []
+        user = User.query.filter_by(username=session['username']).first()
+        selected_options = user.selected_options or ""
+        selected_options = selected_options.split(",")
+        
         for i in range(len(Company_Name)):
-            company_list.append([Company_Name[i], Symbol[i]])
+            if Symbol[i] in selected_options:
+                company_list.append([Company_Name[i], Symbol[i], True])
+            else:   
+                company_list.append([Company_Name[i], Symbol[i],False])
 
         return render_template('welcome.html', username=session['username'],company_list=company_list)
     else:
@@ -80,5 +89,25 @@ def logout():
     session.pop('username', None)
     return redirect(url_for('index'))
 
+@app.route('/update_selection', methods=['POST'])
+def update_selection():
+    checkbox_id = request.form['checkbox_id']
+    selected = request.form['selected'] == 'true'
+    # Retrieve the current user
+    user = User.query.filter_by(username=session['username']).first()
+
+    # Update the selected state in the database
+    selected_options = user.selected_options or ""
+    selected_options_set = set(selected_options.split(','))
+    if selected:
+        selected_options_set.add(checkbox_id)
+    else:
+        selected_options_set.discard(checkbox_id)
+    selected_options_set.discard('True')
+    selected_options_set.discard('False')
+    user.selected_options = ','.join(selected_options_set)
+    db.session.commit()
+    print(user.selected_options)
+    return 'OK'
 if __name__ == '__main__':
     app.run(debug=True)
