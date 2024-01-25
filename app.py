@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'  # Replace with your actual secret key
+app.secret_key = 'rwewerwf#3243@2d'  # Replace with your actual secret key
 
 # Database Configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
@@ -28,15 +28,21 @@ def index():
 def register():
     if request.method == 'POST':
         username = request.form['username']
-        password = request.form['password']
-        hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
-
-        new_user = User(username=username, password_hash=hashed_password)
-        db.session.add(new_user)
-        db.session.commit()
-
-        flash('Registration successful! Please login.')
-        return redirect(url_for('index'))
+        password1 = request.form['password1']
+        password2 = request.form['password2']
+        if(len(username)<4):
+            flash("Username must be greater than 3 characters", category="error")
+        elif(password1!=password2):
+            flash("Password doesn't match", category="error")
+        elif(len(password1)<4):
+            flash("Password must be atleast 4 characters", category="error")
+        else:
+            hashed_password = generate_password_hash(password1, method='pbkdf2:sha256')
+            new_user = User(username=username, password_hash=hashed_password)
+            db.session.add(new_user)
+            db.session.commit()
+            flash('Registration successful! Please login.', category="success")
+            return redirect(url_for('index'))
 
     return render_template('register.html')
 
