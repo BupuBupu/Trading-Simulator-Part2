@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
-
+import pandas as pd
 app = Flask(__name__)
 app.secret_key = 'rwewerwf#3243@2d'  # Replace with your actual secret key
 
@@ -63,7 +63,14 @@ def login():
 @app.route('/dashboard')
 def dashboard():
     if 'user_id' in session:
-        return render_template('welcome.html', username=session['username'])
+        df = pd.read_csv('./static/ind_nifty50list.csv')
+        Company_Name = list(df['Company Name'])
+        Symbol = list(df['Symbol'])
+        company_list = []
+        for i in range(len(Company_Name)):
+            company_list.append([Company_Name[i], Symbol[i]])
+
+        return render_template('welcome.html', username=session['username'],company_list=company_list)
     else:
         return redirect(url_for('index'))
 

@@ -30,7 +30,8 @@ body {
     margin-bottom: 15px;
 }
 
-input[type="text"], input[type="password"] {
+input[type="text"],
+input[type="password"] {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
@@ -46,39 +47,35 @@ button {
     /* cursor: pointer; */
 
 }
-    /* Add this to your existing style.css */
+
+/* Add this to your existing style.css */
 
 .welcome-container {
-    text-align: center;
     background-color: rgba(255, 255, 255, 0.5);
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     width: 100%;
     height: 100%;
-    margin: auto;
-}
-
-.welcome-container h1 {
-    margin-bottom: 20px;
 }
 
 .logout-button {
     display: inline-block;
-    padding: 10px 20px;
+    /* padding: 10px 10000px; */
     background-color: #dc3545;
     color: white;
     border-radius: 5px;
     text-decoration: none;
-    transition: transform 1s ease-in-out;
+    height: 0.1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* transition: transform 1s ease-in-out; */
 }
 
 .logout-button:hover {
     background-color: #c82333;
-    transform: rotate(360deg);
+    /* transform: rotate(360deg); */
 }
 
-.form-container{
+.form-container {
     background-color: white;
     width: 22rem;
     height: 20rem;
@@ -89,13 +86,15 @@ button {
     border-radius: 8px;
     background-color: rgba(255, 255, 255, 0.5);
 }
-.form-group{
+
+.form-group {
     width: 60%;
     /* margin-right: 10rem; */
     margin: auto;
     margin-bottom: 1rem;
 }
-.form-group-login{
+
+.form-group-login {
     width: 30%;
     margin: auto;
     cursor: pointer;
@@ -103,9 +102,101 @@ button {
     border-radius: 3px;
     color: aliceblue;
 }
-.form-group-login:hover{
+
+.form-group-login:hover {
     transform: scale(1.1);
     transform: rotate(720deg);
     background-color: rgb(10, 43, 133);
 }
 
+nav {
+    background-color: rgba(255, 255, 255, 0.6);
+    padding: 0.5rem;
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    margin: 0 10px;
+    font-weight: bold;
+}
+
+#sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+#sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+#sidebar a:hover {
+    color: #f1f1f1;
+}
+
+#sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+#main {
+    transition: margin-left .5s;
+    padding: 16px;
+}
+
+#openBtn {
+    font-size: 30px;
+    cursor: pointer;
+    display: block;
+}
+
+.checkmark {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 15px;
+    font-size: 24px;
+    color: #00ff00;
+    /* Green color for the tick */
+    display: none;
+}
+
+/* Add this CSS rule to style the selected link */
+#sidebar a.selected {
+    background-color: #333;
+}
+
+/* Add this CSS rule to style the checkbox */
+#sidebar a input[type="checkbox"] {
+    display: none;
+}
+
+#sidebar a input[type="checkbox"]:checked+.checkmark {
+    display: block;
+}
+.sidebar-title{
+    color: white;
+    text-align: center;
+    margin-bottom: 1rem;
+}

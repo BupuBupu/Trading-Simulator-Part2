@@ -1,15 +1,57 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Welcome</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='fav.webp') }}" type="image/x-icon">
 </head>
+
 <body>
     <div class="welcome-container">
-        <h1>Welcome, {{ username }}!</h1>
-        <p>This is your dashboard.</p>
-        <a href="/logout" class="logout-button">Logout</a>
+        <nav>
+            <span>Welcome, {{ username }}!</span>
+            <a href="/logout" class="logout-button">Logout</a>
+        </nav>
+        <div class="sidebar_main">
+            <div id="sidebar">
+                
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+                <div class="sidebar-title">
+                    <h2>Available Stocks</h2>
+                </div>
+                {% for option in company_list %}
+                <a href="#" onclick="toggleSelection(this)">
+                    <input type="checkbox" id="{{ option['checkbox_id'] }}">
+                    <span class="checkmark"></span>
+                    {{option[0]}}
+                    <label for="{{ option['checkbox_id'] }}">{{ option['label'] }}</label>
+                </a>
+                {% endfor %}
+                <a href="#" onclick="toggleSelection(this)">
+                    <input type="checkbox" id="link1_checkbox">
+                    <span class="checkmark"></span>
+                </a>
+                <a href="#" onclick="toggleSelection(this)">
+                    <input type="checkbox" id="link1_checkbox">
+                    <span class="checkmark"></span>
+                </a>
+                <a href="#" onclick="toggleSelection(this)">
+                    <input type="checkbox" id="link1_checkbox">
+                    <span class="checkmark"></span>
+                </a>
+                <a href="#" onclick="toggleSelection(this)">
+                    <input type="checkbox" id="link1_checkbox">
+                    <span class="checkmark"></span>
+                </a>    
+            </div>
+
+            <div id="main">
+                <span id="openBtn" style="font-size:30px;cursor:pointer" onclick="openNav()">☰</span>
+            </div>
+        </div>
     </div>
+    <script src="{{ url_for('static', filename='welcome.js') }}"></script>
 </body>
+
 </html>
