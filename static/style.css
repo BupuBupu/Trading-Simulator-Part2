@@ -1,12 +1,16 @@
 /* style.css */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f2f2f2;
+    /* background-color: #f2f2f2; */
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
+    background-image: url(./background.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 .login-container {
@@ -39,6 +43,7 @@ button {
     padding: 10px;
     border: none;
     background-color: #007bff;
+    /* cursor: pointer; */
 
 }
     /* Add this to your existing style.css */
