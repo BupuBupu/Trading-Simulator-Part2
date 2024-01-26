@@ -20,6 +20,7 @@
                 <div class="sidebar-title">
                     <h2>Available Stocks</h2>
                     <button onclick="uncheckAll()" class="reset_button">Reset Selection</button>
+                    <button onclick="go()" class="go_button">Go</button>
                 </div>
                 {% for option in company_list %}
                 <a href="#" onclick="toggleSelection(this)">
@@ -49,7 +50,7 @@
         </div>
         <div class="main_container">
             <div class="graph_container">
-                {{graphcode}}
+                {{graphcode | safe}}
             </div>
         </div>
     </div>

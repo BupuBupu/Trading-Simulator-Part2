@@ -29,3 +29,7 @@ function uncheckAll() {
         updateSelectionOnServer(checkbox.id, false);
     });
 }
+
+function go(){
+    window.location.href = "dashboard";
+}

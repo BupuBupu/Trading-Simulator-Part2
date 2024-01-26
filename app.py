@@ -79,9 +79,10 @@ def dashboard():
                 company_list.append([Company_Name[i], Symbol[i], 'checked'])
             else:   
                 company_list.append([Company_Name[i], Symbol[i],''])
-        data_frame = daily_monthlyData.store_stocks(selected_options,[2]*len(selected_options))
+        selected_options.remove('')
+        data_frame = daily_monthlyData.store_stocks(selected_options,[1]*len(selected_options))
         htmlcode = daily_monthlyData.plot_to_html(data_frame)
-        return render_template('welcome.html', username=session['username'],company_list=company_list,graphcode = htmlcode)
+        return render_template('welcome.html', username=session['username'],company_list=company_list,graphcode=htmlcode)
     else:
         return redirect(url_for('index'))
 

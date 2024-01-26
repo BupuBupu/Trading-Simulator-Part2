@@ -213,4 +213,16 @@ nav a {
     cursor: pointer;
     width: 50%;
     border-radius: 3px;
+    background-color: #c82333;
+}
+.go_button{
+    display: inline-block;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 50%;
+    border-radius: 3px;
+    margin-top: 1rem;
+
 }

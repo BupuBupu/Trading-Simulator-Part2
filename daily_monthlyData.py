@@ -33,12 +33,14 @@ def store_stocks(symbols, years):
     stocksDF=[]
     length = len(symbols)
     for i in range(length):
+        print("started")
         df = save_df(symbols[i], years[i])
         print("i:", i)
         df = pd.DataFrame({
             symbols[i]:df["CLOSE"].to_numpy()
         }, index=df["DATE"])
         stocksDF.append(df)
+        print("ended")
     # Merging all based on close prices based on index i.e. DATE
     df_merged=stocksDF[0]
     for i in range(1, length):
@@ -48,8 +50,19 @@ def store_stocks(symbols, years):
         
 def plot_to_html(df_merged):
     if(df_merged.empty):
-        go.Figure().show()
-        return
+        fig = go.Figure()
+        fig.update_layout(
+        dragmode="zoom",
+        hovermode="x",
+        legend=dict(traceorder="reversed"),
+        height=800,
+        template="plotly_white",
+        margin=dict(
+            t=100,
+            b=100
+        ),
+        )
+        return pio.to_html(fig, full_html=False)
     dfmon_merged = df_merged.resample('M').last()
     dfyr_merged = df_merged.resample('AS').last()
     
@@ -111,5 +124,6 @@ def plot_to_html(df_merged):
     )
     my_script = pio.to_html(fig, full_html=False)
     return my_script
-# df = store_stocks([], [])
-# plot_to_html(df)
+# df = store_stocks(['SBIN'], [2])
+# with open('plot.html', 'w') as f:
+#     f.write(plot_to_html(df))
