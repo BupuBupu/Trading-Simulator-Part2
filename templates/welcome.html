@@ -22,7 +22,7 @@
                 </div>
                 {% for option in company_list %}
                 <a href="#" onclick="toggleSelection(this)">
-                    <input type="checkbox" id="{{ option[1] }}" {% if option[2]=="True" %}checked{% endif %}>
+                    <input type="checkbox" id="{{ option[1] }}" {{option[2]}}>
                     <span class="checkmark"></span>
                     {{option[0]}}
                     <label for="{{ option['checkbox_id'] }}">{{ option['label'] }}</label>

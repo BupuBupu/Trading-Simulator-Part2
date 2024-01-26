@@ -72,12 +72,12 @@ def dashboard():
         user = User.query.filter_by(username=session['username']).first()
         selected_options = user.selected_options or ""
         selected_options = selected_options.split(",")
-        
+        print(selected_options)
         for i in range(len(Company_Name)):
             if Symbol[i] in selected_options:
-                company_list.append([Company_Name[i], Symbol[i], True])
+                company_list.append([Company_Name[i], Symbol[i], 'checked'])
             else:   
-                company_list.append([Company_Name[i], Symbol[i],False])
+                company_list.append([Company_Name[i], Symbol[i],''])
 
         return render_template('welcome.html', username=session['username'],company_list=company_list)
     else:
