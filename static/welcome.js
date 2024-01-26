@@ -22,3 +22,10 @@ function updateSelectionOnServer(checkboxId, selected) {
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.send(`checkbox_id=${checkboxId}&selected=${selected}&username=${encodeURIComponent('{{ username }}')}`);
 }
+function uncheckAll() {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = false;
+        updateSelectionOnServer(checkbox.id, false);
+    });
+}

@@ -183,9 +183,6 @@ nav a {
 }
 
 /* Add this CSS rule to style the selected link */
-#sidebar a.selected {
-    background-color: #333;
-}
 
 /* Add this CSS rule to style the checkbox */
 #sidebar a input[type="checkbox"] {
@@ -207,4 +204,13 @@ nav a {
     color: white;
     text-align: center;
     margin-bottom: 1rem;
+}
+.reset_button{
+    display: inline-block;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 50%;
+    border-radius: 3px;
 }

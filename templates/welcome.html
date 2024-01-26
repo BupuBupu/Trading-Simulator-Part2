@@ -19,6 +19,7 @@
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
                 <div class="sidebar-title">
                     <h2>Available Stocks</h2>
+                    <button onclick="uncheckAll()" class="reset_button">Reset Selection</button>
                 </div>
                 {% for option in company_list %}
                 <a href="#" onclick="toggleSelection(this)">
@@ -45,6 +46,9 @@
             <div id="main">
                 <span id="openBtn" style="font-size:30px;cursor:pointer" onclick="openNav()">☰</span>
             </div>
+        </div>
+        <div class="main_container">
+            
         </div>
     </div>
     <script src="{{ url_for('static', filename='welcome.js') }}"></script>

@@ -88,7 +88,6 @@ def logout():
     session.pop('user_id', None)
     session.pop('username', None)
     return redirect(url_for('index'))
-
 @app.route('/update_selection', methods=['POST'])
 def update_selection():
     checkbox_id = request.form['checkbox_id']
