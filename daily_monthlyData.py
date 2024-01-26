@@ -27,7 +27,9 @@ def save_df(symbol, last_years):
     return df
 
 def store_stocks(symbols, years):
-    # respective store dfs of respective symbols and years, where symbols and years are a list
+    # respective store dfs of respective symbols and years, where symbols and years are a list\
+    if(len(symbols)==0):
+        return pd.DataFrame()
     stocksDF=[]
     length = len(symbols)
     for i in range(length):
@@ -45,6 +47,9 @@ def store_stocks(symbols, years):
     return df_merged
         
 def plot_to_html(df_merged):
+    if(df_merged.empty):
+        go.Figure().show()
+        return
     dfmon_merged = df_merged.resample('M').last()
     dfyr_merged = df_merged.resample('AS').last()
     
@@ -104,6 +109,7 @@ def plot_to_html(df_merged):
             b=100
         ),
     )
-    
     my_script = pio.to_html(fig, full_html=False)
     return my_script
+# df = store_stocks([], [])
+# plot_to_html(df)

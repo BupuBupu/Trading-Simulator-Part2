@@ -15,7 +15,7 @@
         </nav>
         <div class="sidebar_main">
             <div id="sidebar">
-                
+             
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
                 <div class="sidebar-title">
                     <h2>Available Stocks</h2>
@@ -48,7 +48,9 @@
             </div>
         </div>
         <div class="main_container">
-            
+            <div class="graph_container">
+                {{graphcode}}
+            </div>
         </div>
     </div>
     <script src="{{ url_for('static', filename='welcome.js') }}"></script>
