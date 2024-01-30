@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify   
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 import pandas as pd
@@ -18,6 +18,7 @@ class User(db.Model):
     username = db.Column(db.String(100), unique=True, nullable=False)
     password_hash = db.Column(db.String(200), nullable=False)
     selected_options = db.Column(db.String(255))
+    years = db.Column(db.Integer)
 
 # Initialize Database within Application Context
 with app.app_context():
@@ -73,14 +74,16 @@ def dashboard():
         user = User.query.filter_by(username=session['username']).first()
         selected_options = user.selected_options or ""
         selected_options = selected_options.split(",")
-        print(selected_options)
+        # print(selected_options)
         for i in range(len(Company_Name)):
             if Symbol[i] in selected_options:
                 company_list.append([Company_Name[i], Symbol[i], 'checked'])
             else:   
                 company_list.append([Company_Name[i], Symbol[i],''])
+        years = user.years or 1
+        print(years)
         selected_options.remove('')
-        data_frame = daily_monthlyData.store_stocks(selected_options,[1]*len(selected_options))
+        data_frame = daily_monthlyData.store_stocks(selected_options,[years]*len(selected_options))
         htmlcode = daily_monthlyData.plot_to_html(data_frame)
         return render_template('welcome.html', username=session['username'],company_list=company_list,graphcode=htmlcode)
     else:
@@ -109,7 +112,16 @@ def update_selection():
     selected_options_set.discard('False')
     user.selected_options = ','.join(selected_options_set)
     db.session.commit()
-    print(user.selected_options)
+    # print(user.selected_options)
     return 'OK'
+@app.route('/process_input', methods=['POST'])
+def process_input():
+    user_input = request.form['selected_year']
+    user = User.query.filter_by(username=session['username']).first()
+    print(user_input)
+    user.years = user_input
+    db.session.commit()
+    return "OK"
+
 if __name__ == '__main__':
     app.run(debug=True)

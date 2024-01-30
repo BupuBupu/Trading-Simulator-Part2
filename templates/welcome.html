@@ -7,7 +7,7 @@
     <link rel="icon" href="{{ url_for('static', filename='fav.webp') }}" type="image/x-icon">
 </head>
 
-<body>
+<body class="welcome-container">
     <div class="welcome-container">
         <nav>
             <span>Welcome, {{ username }}!</span>
@@ -15,7 +15,7 @@
         </nav>
         <div class="sidebar_main">
             <div id="sidebar">
-             
+
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
                 <div class="sidebar-title">
                     <h2>Available Stocks</h2>
@@ -41,11 +41,19 @@
                 </a>
                 <a href="#" onclick="toggleSelection(this)">
                     <span class="checkmark"></span>
-                </a>    
+                </a>
             </div>
 
             <div id="main">
                 <span id="openBtn" style="font-size:30px;cursor:pointer" onclick="openNav()">☰</span>
+            </div>
+            <div class="head_text">
+                Below are the selected stocks
+            </div>
+            <div class="input_container">
+                <input type="text" id="userInput" placeholder="Enter the number of years">
+                <button onclick="sendInput()" class="submit_button">Submit</button>
+                <p id="output"></p>
             </div>
         </div>
         <div class="main_container">
@@ -53,6 +61,21 @@
                 {{graphcode | safe}}
             </div>
         </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-logo">
+                        <!-- Your logo or brand icon goes here -->
+                        <img src="{{ url_for('static', filename='Logo.jpeg') }}" alt="Logo">
+                    </div>
+                    <div class="footer-links">
+                        Developed By Vipul and Rajarshee
+                    </div>
+                </div>
+                
+            </div>
+        </footer>
     </div>
     <script src="{{ url_for('static', filename='welcome.js') }}"></script>
 </body>
