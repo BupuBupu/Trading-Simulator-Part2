@@ -27,18 +27,20 @@ def save_df(symbol, last_years):
     return df
 
 def store_stocks(symbols, years):
-    if(len(symbols)!=0):
+    # respective store dfs of respective symbols and years, where symbols and years are a list\
+    if(len(symbols)==0):
         return pd.DataFrame()
-    # respective store dfs of respective symbols and years, where symbols and years are a list
     stocksDF=[]
     length = len(symbols)
     for i in range(length):
+        # print("started")
         df = save_df(symbols[i], years[i])
-        print("i:", i)
+        # print("i:", i)
         df = pd.DataFrame({
             symbols[i]:df["CLOSE"].to_numpy()
         }, index=df["DATE"])
         stocksDF.append(df)
+        # print("ended")
     # Merging all based on close prices based on index i.e. DATE
     df_merged=stocksDF[0]
     for i in range(1, length):
@@ -47,14 +49,30 @@ def store_stocks(symbols, years):
     return df_merged
         
 def plot_to_html(df_merged):
-    if(df_merged.empty()):
-        go.Figure().show()
+    if(df_merged.empty):
+        fig = go.Figure()
+        fig.update_layout(
+        dragmode="zoom",
+        hovermode="x",
+        legend=dict(traceorder="reversed"),
+        height=800,
+        template="plotly_white",
+        margin=dict(
+            t=100,
+            b=100
+        ),
+        )
+        return pio.to_html(fig, full_html=False)
+    dfweek_merged = df_merged.resample('W-MON').last()
     dfmon_merged = df_merged.resample('M').last()
     dfyr_merged = df_merged.resample('AS').last()
     
     df_merged.index.names = ['Date']
     df_merged.reset_index(inplace=True)
     
+    dfweek_merged.index.names = ['Date']
+    dfweek_merged.reset_index(inplace=True)
+
     dfmon_merged.index.names = ['Date']
     dfmon_merged.reset_index(inplace=True)
     
@@ -62,7 +80,7 @@ def plot_to_html(df_merged):
     dfyr_merged.reset_index(inplace=True)
     
     fig = go.Figure()
-    dfs = {'daily':df_merged, 'monthly': dfmon_merged, 'yearly' :dfyr_merged}
+    dfs = {'daily':df_merged, 'weekly': dfweek_merged, 'monthly': dfmon_merged, 'yearly' :dfyr_merged}
     
     # specify visibility for traces accross dataframes
     frames = len(dfs) # number of dataframes organized in  dict
@@ -78,7 +96,7 @@ def plot_to_html(df_merged):
     # - k is the name for each dataframe
     # - v is the dataframe itself
     for i, (k, v) in enumerate(dfs.items()):
-        print(i)
+        # print(i)
         for c, column in enumerate(v.columns[1:]):
             fig.add_scatter(name = column,
                             x = v['Date'],
@@ -108,11 +126,5 @@ def plot_to_html(df_merged):
             b=100
         ),
     )
-    
-    # my_script = pio.to_html(fig, full_html=False)
-    # return my_script
-
-df = store_stocks([], [])
-print(df)
-fig = go.Figure()
-fig.show()
+    my_script = pio.to_html(fig, full_html=False)
+    return my_script
