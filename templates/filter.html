@@ -24,10 +24,16 @@
                 <input type="text" class="dropdown-input" id="selectedOption" readonly onclick="toggleDropdown()"
                     value="Select an option">
                 <div class="dropdown-content" id="dropdownOptions">
-                    <a href="#" onclick="selectOption('Option 1')">Option 1</a>
-                    <a href="#" onclick="selectOption('Option 2')">Option 2</a>
-                    <a href="#" onclick="selectOption('Option 3')">Option 3</a>
+                    <a href="#" onclick="selectOption('Open Price')">Open Price</a>
+                    <a href="#" onclick="selectOption('Close Price')">Close Price</a>
+                    <a href="#" onclick="selectOption('Volume/Trade')">Volume/Trade</a>
+                    <a href="#" onclick="selectOption('Daily Increment')">Daily Increment</a>
                 </div>
+            </div>
+            <div class="gofilter">
+                <button onclick="updateParam()">
+                    Go
+                </button>
             </div>
         </div>
         <script src="{{ url_for('static', filename='welcome.js') }}"></script>

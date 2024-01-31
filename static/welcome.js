@@ -71,3 +71,19 @@ function selectOption(option) {
   document.getElementById("selectedOption").value = option;
   toggleDropdown();
 }
+
+function updateParam(){
+  var selectedOption = document.getElementById("selectedOption").value;
+  const xhr = new XMLHttpRequest();
+  xhr.open("POST", "/update_filter", true);
+  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  xhr.send(
+    `params=${selectedOption}&username=${encodeURIComponent(
+      "{{ username }}"
+    )}`
+  );
+  setTimeout(function () {
+    window.location.href = "filter";
+  }, 1500);
+
+}

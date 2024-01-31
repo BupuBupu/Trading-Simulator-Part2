@@ -20,6 +20,7 @@ class User(db.Model):
     password_hash = db.Column(db.String(200), nullable=False)
     selected_options = db.Column(db.String(255))
     years = db.Column(db.Integer)
+    params = db.Column(db.String(255))
 
 # Initialize Database within Application Context
 with app.app_context():
@@ -133,6 +134,12 @@ def filter():
         return render_template('filter.html', username=session['username'])
     else:
         return redirect(url_for('index'))    
-
+@app.route('/update_filter', methods=['POST'])
+def update_filter():
+    user = User.query.filter_by(username=session['username']).first()
+    user.params = user.params or ""
+    user.params = request.form['params']
+    db.session.commit()
+    return "OK"
 if __name__ == '__main__':
     app.run(debug=True)
