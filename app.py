@@ -125,13 +125,19 @@ def process_input():
     user.years = user_input
     db.session.commit()
     return "OK"
-@app.route('/filter', methods=['GET'])
+@app.route('/filter', methods=['GET','POST'])
 def filter():
     if 'user_id' in session:
         df = pd.read_csv('./static/ind_nifty50list.csv')
         user = User.query.filter_by(username=session['username']).first()
-        
-        return render_template('filter.html', username=session['username'])
+        param = user.params or ""
+        param_ls  = ['open_pr','close_pr','daily_inc','average','trades_per_vol']
+        if param not in param_ls:
+            param = 'open_pr'
+        data = filter_data.filtered_data()
+        table = filter_data.table_const(data)
+        table_html = filter_data.table_to_html(table,param)
+        return render_template('filter.html', username=session['username'],table_html=table_html,param=param)
     else:
         return redirect(url_for('index'))    
 @app.route('/update_filter', methods=['POST'])

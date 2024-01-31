@@ -431,3 +431,11 @@ nav a {
 .dropdown:hover .dropdown-content {
     display: block;
 }
+
+.table_container {
+    width: 80%;
+    /* height: 40vh; */
+    margin: auto;
+    /* border-radius: 3px; */
+    background-color: rgba(255, 255, 255, 0.5);
+}
