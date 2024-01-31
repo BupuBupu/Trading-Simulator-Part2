@@ -126,5 +126,6 @@ def plot_to_html(df_merged):
             b=100
         ),
     )
+    fig.update_layout(yaxis_title="Price in INR")
     my_script = pio.to_html(fig, full_html=False)
     return my_script
