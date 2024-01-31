@@ -56,3 +56,9 @@ function sendInput() {
   }, 1500);
 
 }
+ function changePage(){
+  window.location.href = "filter";
+}
+function changePage1(){
+  window.location.href = "dashboard";
+}

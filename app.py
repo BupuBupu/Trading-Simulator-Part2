@@ -4,6 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import pandas as pd
 from flask_migrate import Migrate
 import daily_monthlyData
+import filter_data
 app = Flask(__name__)
 app.secret_key = 'rwewerwf#3243@2d'  # Replace with your actual secret key
 
@@ -122,6 +123,15 @@ def process_input():
     user.years = user_input
     db.session.commit()
     return "OK"
+@app.route('/filter', methods=['GET'])
+def filter():
+    if 'user_id' in session:
+        df = pd.read_csv('./static/ind_nifty50list.csv')
+        user = User.query.filter_by(username=session['username']).first()
+        
+        return render_template('filter.html', username=session['username'])
+    else:
+        return redirect(url_for('index'))    
 
 if __name__ == '__main__':
     app.run(debug=True)
