@@ -18,8 +18,19 @@
                 Analyze Stocks
             </button>
         </div>
-    </div>
-    <script src="{{ url_for('static', filename='welcome.js') }}"></script>
+        <div class="head_text_2">
+            <p>Select the Filtering Parameter</p>
+            <div class="dropdown">
+                <input type="text" class="dropdown-input" id="selectedOption" readonly onclick="toggleDropdown()"
+                    value="Select an option">
+                <div class="dropdown-content" id="dropdownOptions">
+                    <a href="#" onclick="selectOption('Option 1')">Option 1</a>
+                    <a href="#" onclick="selectOption('Option 2')">Option 2</a>
+                    <a href="#" onclick="selectOption('Option 3')">Option 3</a>
+                </div>
+            </div>
+        </div>
+        <script src="{{ url_for('static', filename='welcome.js') }}"></script>
 </body>
 
 </html>

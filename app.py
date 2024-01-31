@@ -81,6 +81,7 @@ def dashboard():
                 company_list.append([Company_Name[i], Symbol[i], 'checked'])
             else:   
                 company_list.append([Company_Name[i], Symbol[i],''])
+        # user.years = 1
         years = user.years or 1
         print(years)
         selected_options.remove('')

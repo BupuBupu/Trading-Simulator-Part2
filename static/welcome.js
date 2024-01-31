@@ -62,3 +62,12 @@ function sendInput() {
 function changePage1(){
   window.location.href = "dashboard";
 }
+function toggleDropdown() {
+  var dropdownContent = document.getElementById("dropdownOptions");
+  dropdownContent.style.display = (dropdownContent.style.display === "block") ? "none" : "block";
+}
+
+function selectOption(option) {
+  document.getElementById("selectedOption").value = option;
+  toggleDropdown();
+}
