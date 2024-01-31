@@ -84,6 +84,6 @@ function updateParam(){
   );
   setTimeout(function () {
     window.location.href = "filter";
-  }, 1500);
+  }, 1000);
 
 }
