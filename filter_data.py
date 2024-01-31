@@ -31,8 +31,12 @@ def save_df(symbol):
     df=pd.concat([df["DATE"], df[df.columns[1:]].astype("float32", copy=True)], axis=1)
     return df
 
-def filtered_data(stocks):
+def filtered_data():
+    '''
+    Returns a 3d list, first indexes are based on the params and each params has 2d list which is a vector of pairs, where the first value represents the param value and second value represents the corresponding Stock name.
+    '''
     # Will store df of last 1 week for every stock
+    stocks = ['ADANIENT', 'ADANIPORTS', 'APOLLOHOSP', 'ASIANPAINT', 'AXISBANK', 'BAJAJ-AUTO', 'BAJFINANCE', 'BAJAJFINSV', 'BPCL', 'BHARTIARTL', 'BRITANNIA', 'CIPLA', 'COALINDIA', 'DIVISLAB', 'DRREDDY', 'EICHERMOT', 'GRASIM', 'HCLTECH', 'HDFCBANK', 'HDFCLIFE', 'HEROMOTOCO', 'HINDALCO', 'HINDUNILVR', 'ICICIBANK', 'ITC', 'INDUSINDBK', 'INFY', 'JSWSTEEL', 'KOTAKBANK', 'LTIM', 'LT', 'MARUTI', 'NTPC', 'NESTLEIND', 'ONGC', 'POWERGRID', 'RELIANCE', 'SBILIFE', 'SBIN', 'SUNPHARMA', 'TCS', 'TATACONSUM', 'TATAMOTORS', 'TATASTEEL', 'TECHM', 'TITAN', 'UPL', 'ULTRACEMCO', 'WIPRO']
     dfs = []
     for i in range(len(stocks)):
         df = save_df(stocks[i])
