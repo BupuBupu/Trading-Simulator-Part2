@@ -96,7 +96,7 @@ def table_to_html(my_data, sort_based_on):
     my_data.reset_index(inplace=True, drop=True)
     my_data["Rank"]=my_data.index+1
     my_data.rename(columns={sort_based_on:sort_based_on+"\u2193"}, inplace=True)
-    my_data = my_data.head(10)
+    # my_data = my_data.head(10)
     header = my_data.columns.tolist()
     values = my_data.transpose().values.tolist()
     fig = go.Figure(
