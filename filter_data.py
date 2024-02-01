@@ -110,18 +110,22 @@ def table_to_html(my_data, sort_based_on):
             go.Table(header=dict(
                 values=header,
                 align=['center'],
-                font=dict(color='white', size=30),
-                height=70
+                font=dict(color='white', size=20),
+                height=50
             ),
             cells=dict(
                 values=values, 
                 align=['center'],
                 fill_color=colors,
-                font_size=25,
-                height=50
+                font_size=20,
+                height=30
             )
             )
         ]
+    )
+    fig.update_layout(
+        margin = dict(l = 0, r = 0, t = 0, b = 0),
+        height=700,
     )
     my_script = pio.to_html(fig, full_html=False)
     return my_script

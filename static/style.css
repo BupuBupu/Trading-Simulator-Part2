@@ -433,11 +433,11 @@ nav a {
 }
 
 .table_container {
-    width: 80%;
-    /* height: 40vh; */
+    width: 90%;
+    /* height: 100vh; */
     margin: auto;
     /* border-radius: 3px; */
-    background-color: rgba(255, 255, 255, 0.5);
+    /* background-color: rgba(28, 241, 9, 0.5); */
 }
 .home-button {
     color:#007bff;
