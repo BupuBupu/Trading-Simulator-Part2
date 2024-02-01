@@ -99,7 +99,6 @@ def table_to_html(my_data, sort_based_on):
     
     header = my_data.columns.tolist()
     values = my_data.transpose().values.tolist()
-    print(header)
     col_to_color = header.index(sort_based_on+"\u2193")
     color='#FFD700'
     others='#FFFFCC'
@@ -108,8 +107,19 @@ def table_to_html(my_data, sort_based_on):
 
     fig = go.Figure(
         data=[
-            go.Table(header=dict(values=header),
-            cells=dict(values=values, fill_color=colors)
+            go.Table(header=dict(
+                values=header,
+                align=['center'],
+                font=dict(color='white', size=30),
+                height=70
+            ),
+            cells=dict(
+                values=values, 
+                align=['center'],
+                fill_color=colors,
+                font_size=25,
+                height=50
+            )
             )
         ]
     )
