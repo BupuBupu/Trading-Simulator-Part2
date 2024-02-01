@@ -82,8 +82,8 @@ def table_const(params):
     for i in range(len(stocks)):
         trades_per_vol.append(params["trades_per_vol"][i][0])
     
-    my_data["open"]=open_pr
-    my_data["close"]=close_pr
+    my_data["open_pr"]=open_pr
+    my_data["close_pr"]=close_pr
     my_data["daily_inc"]=daily_inc
     my_data["average"]=average
     my_data["trades_per_vol"]=trades_per_vol
