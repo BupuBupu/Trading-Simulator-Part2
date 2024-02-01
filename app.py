@@ -88,7 +88,7 @@ def dashboard():
         selected_options.remove('')
         data_frame = daily_monthlyData.store_stocks(selected_options,[years]*len(selected_options))
         htmlcode = daily_monthlyData.plot_to_html(data_frame)
-        return render_template('welcome.html', username=session['username'],company_list=company_list,graphcode=htmlcode)
+        return render_template('welcome.html', username=session['username'],company_list=company_list,graphcode=htmlcode,year = years)
     else:
         return redirect(url_for('index'))
 
@@ -134,10 +134,11 @@ def filter():
         param_ls  = ['open_pr','close_pr','daily_inc','average','trades_per_vol']
         if param not in param_ls:
             param = 'open_pr'
-        data = filter_data.filtered_data()
+        data,date = filter_data.filtered_data()
         table = filter_data.table_const(data)
         table_html = filter_data.table_to_html(table,param)
-        return render_template('filter.html', username=session['username'],table_html=table_html,param=param)
+        date_str = f"{date[0]}, {date[1]} {date[2]} {date[3]}"
+        return render_template('filter.html', username=session['username'],table_html=table_html,param=param, date=date_str)
     else:
         return redirect(url_for('index'))    
 @app.route('/update_filter', methods=['POST'])

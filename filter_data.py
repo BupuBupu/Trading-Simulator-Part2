@@ -41,8 +41,10 @@ def filtered_data():
     # Will store df of last 1 week for every stock
     stocks = ['ADANIENT', 'ADANIPORTS', 'APOLLOHOSP', 'ASIANPAINT', 'AXISBANK', 'BAJAJ-AUTO', 'BAJFINANCE', 'BAJAJFINSV', 'BPCL', 'BHARTIARTL', 'BRITANNIA', 'CIPLA', 'COALINDIA', 'DIVISLAB', 'DRREDDY', 'EICHERMOT', 'GRASIM', 'HCLTECH', 'HDFCBANK', 'HDFCLIFE', 'HEROMOTOCO', 'HINDALCO', 'HINDUNILVR', 'ICICIBANK', 'ITC', 'INDUSINDBK', 'INFY', 'JSWSTEEL', 'KOTAKBANK', 'LTIM', 'LT', 'MARUTI', 'NTPC', 'NESTLEIND', 'ONGC', 'POWERGRID', 'RELIANCE', 'SBILIFE', 'SBIN', 'SUNPHARMA', 'TCS', 'TATACONSUM', 'TATAMOTORS', 'TATASTEEL', 'TECHM', 'TITAN', 'UPL', 'ULTRACEMCO', 'WIPRO']
     dfs = []
+    date_str = ""
     for i in range(len(stocks)):
         df = save_df(stocks[i])
+        date_str=df["DATE"].iloc[0]
         new_df = df["DATE"]
         new_df["OPEN"] = df["OPEN"]
         new_df["CLOSE"] = df["CLOSE"]
@@ -50,7 +52,10 @@ def filtered_data():
         new_df["AVERAGE"]=(df["CLOSE"]+df["OPEN"])/2
         new_df["TRADES PER VOLUME"]=df["NO OF TRADES"]/df["VOLUME"]
         dfs.append(new_df)
-
+    date_str=str(date_str)
+    my_day = date(int(date_str[:4]), int(date_str[5:7]), int(date_str[8:10]))
+    days = ["MON", "TUE", "WED", "THURS", "FRI", "SUN"]
+    months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JULY", "AUG", "SEPT", "OCT", "NOV", "DEC"]
     open_pr = [[dfs[i]["OPEN"].iloc[0], stocks[i]] for i in range(len(stocks))]
     close_pr = [[dfs[i]["CLOSE"].iloc[0], stocks[i]] for i in range(len(stocks))]
     daily_inc = [[dfs[i]["DAILY INCREMENT"].iloc[0], stocks[i]] for i in range(len(stocks))]
@@ -58,7 +63,7 @@ def filtered_data():
     trades_per_vol = [[dfs[i]["TRADES PER VOLUME"].iloc[0], stocks[i]] for i in range(len(stocks))]
     
     params={"open_pr":open_pr, "close_pr":close_pr, "daily_inc":daily_inc, "average":average, "trades_per_vol":trades_per_vol}
-    return params
+    return (params, [days[my_day.weekday()], my_day.day, months[my_day.month-1], my_day.year])
 
 def table_const(params):
     # Construct table based on the parameters for further use

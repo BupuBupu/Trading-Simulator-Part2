@@ -20,7 +20,7 @@
 
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
                 <div class="sidebar-title">
-                    <h2>Available Stocks</h2>
+                    <h2>Watchlist</h2>
                     <button onclick="uncheckAll()" class="reset_button">Reset Selection</button>
                     <button onclick="go()" class="go_button">Go</button>
                 </div>
@@ -53,7 +53,8 @@
                 Below are the selected stocks
             </div>
             <div class="input_container">
-                <input type="text" id="userInput" placeholder="Enter the number of years">
+                <label for="userInput">Select Years: </label>
+                <input type="text" id="userInput" placeholder="Enter the number of years" value={{year}}>
                 <button onclick="sendInput()" class="submit_button">Submit</button>
                 <p id="output"></p>
             </div>

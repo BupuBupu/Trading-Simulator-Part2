@@ -1,59 +1,60 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Filter</title>
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{ url_for('static', filename='style.css') }}"
-    />
-    <link
-      rel="icon"
-      href="{{ url_for('static', filename='fav.webp') }}"
-      type="image/x-icon"
-    />
-  </head>
 
-  <body class="welcome-container" id="filter_body">
-    <div class="welcome-container">
-      <nav>
-        <span>Welcome, {{ username }}!</span>
-        <a href="/dashboard" class="home-button">Home</a>
-        <a href="/filter" class="profile-button">Analyze</a>
-        <a href="/logout" class="logout-button">Logout</a>
-      </nav>
-      <div class="head_text_2">
-        <p>Select the Filtering Parameter</p>
-        <div class="dropdown">
-          <input
-            type="text"
-            class="dropdown-input"
-            id="selectedOption"
-            readonly
-            onclick="toggleDropdown()"
-            value="{{param}}"
-          />
-          <div class="dropdown-content" id="dropdownOptions">
-            <a href="#" onclick="selectOption('open_pr')">open_pr</a>
-            <a href="#" onclick="selectOption('close_pr')">close_pr</a>
-            <a href="#" onclick="selectOption('daily_inc')">daily_inc</a>
-            <a href="#" onclick="selectOption('average')">average</a>
-            <a href="#" onclick="selectOption('trades_per_vol')"
-              >trades_per_vol</a
-            >
-          </div>
-        </div>
-        <div class="gofilter">
-          <button onclick="updateParam()">Go</button>
+<head>
+  <title>Filter</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
+  <link rel="icon" href="{{ url_for('static', filename='fav.webp') }}" type="image/x-icon" />
+</head>
+
+<body class="welcome-container" id="filter_body">
+  <div class="welcome-container">
+    <nav>
+      <span>Welcome, {{ username }}!</span>
+      <a href="/dashboard" class="home-button">Home</a>
+      <a href="/filter" class="profile-button">Analyze</a>
+      <a href="/logout" class="logout-button">Logout</a>
+    </nav>
+    <div class="head_text_2">
+      <p>Select the Filtering Parameter</p>
+      <div class="dropdown">
+        <input type="text" class="dropdown-input" id="selectedOption" readonly onclick="toggleDropdown()"
+          value="{{param}}" />
+        <div class="dropdown-content" id="dropdownOptions">
+          <a href="#" onclick="selectOption('open_pr')">open_pr</a>
+          <a href="#" onclick="selectOption('close_pr')">close_pr</a>
+          <a href="#" onclick="selectOption('daily_inc')">daily_inc</a>
+          <a href="#" onclick="selectOption('average')">average</a>
+          <a href="#" onclick="selectOption('trades_per_vol')">trades_per_vol</a>
         </div>
       </div>
-      <div class="date_text">
-        Showing Data for the date:
-      </div>
-      <div class="table_container">
-        {{table_html|safe}}
+      <div class="gofilter">
+        <button onclick="updateParam()">Go</button>
       </div>
     </div>
-    <script src="{{ url_for('static', filename='welcome.js') }}"></script>
-  </body>
+    <div class="date_text">
+      Showing Data for the date: {{date}}
+    </div>
+    <div class="table_container">
+      {{table_html|safe}}
+    </div>
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-logo">
+            <!-- Your logo or brand icon goes here -->
+            <img src="{{ url_for('static', filename='Logo.jpeg') }}" alt="Logo">
+          </div>
+          <div class="footer-links">
+            Developed By Vipul and Rajarshee
+          </div>
+        </div>
+
+      </div>
+    </footer>
+  </div>
+
+  <script src="{{ url_for('static', filename='welcome.js') }}"></script>
+</body>
+
 </html>
