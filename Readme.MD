@@ -1,5 +1,8 @@
 # COP290 Assignment1 : Trading-Simulator-Part2
 This is part 2 of the Assignment 1 of COP 290 SEM4. 
+### Developed by
+#### Rajarshee Das 2022CS11124
+#### Vipul Vaibhav 2022CS11301
 ## Description
 This web application is developed as a part of the COP290 course. It's a Flask-based project designed to manage user registrations and logins, featuring a welcoming interface.
 
