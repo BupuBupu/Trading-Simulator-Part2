@@ -96,14 +96,31 @@ def table_to_html(my_data, sort_based_on):
     my_data.reset_index(inplace=True, drop=True)
     my_data["Rank"]=my_data.index+1
     my_data.rename(columns={sort_based_on:sort_based_on+"\u2193"}, inplace=True)
-    
+   
     header = my_data.columns.tolist()
     values = my_data.transpose().values.tolist()
     col_to_color = header.index(sort_based_on+"\u2193")
     color='#FFD700'
     others='#FFFFCC'
-    colors = [others]*len(header)
-    colors[col_to_color]=color
+    green='#86DC3D'
+    red='#FDB3BF'
+    green_red_filler = np.full((len(my_data), ), green)
+
+    color_to_assign = [np.full((len(my_data), ), others)]*len(header)
+    daily_index = -1
+    if("daily_inc" in header):
+        daily_index=header.index("daily_inc")
+        for i in range(len(my_data)):
+            if(my_data["daily_inc"].iloc[i]<0):
+                green_red_filler[i]=red
+        color_to_assign[daily_index]=green_red_filler
+        color_to_assign[col_to_color]=np.full((len(my_data), ), color)
+    else:
+        daily_index=header.index("daily_inc"+"\u2193")
+        for i in range(len(my_data)):
+            if(my_data["daily_inc"+"\u2193"].iloc[i]<0):
+                green_red_filler[i]=red
+        color_to_assign[daily_index]=green_red_filler
 
     fig = go.Figure(
         data=[
@@ -116,7 +133,7 @@ def table_to_html(my_data, sort_based_on):
             cells=dict(
                 values=values, 
                 align=['center'],
-                fill_color=colors,
+                fill_color=color_to_assign,
                 font_size=20,
                 height=30
             )
