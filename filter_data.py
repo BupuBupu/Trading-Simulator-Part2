@@ -125,7 +125,3 @@ def table_to_html(my_data, sort_based_on):
     )
     my_script = pio.to_html(fig, full_html=False)
     return my_script
-
-params = filtered_data()
-df = table_const(params)
-table_to_html(df, "daily_inc")
