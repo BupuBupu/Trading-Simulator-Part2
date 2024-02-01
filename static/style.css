@@ -326,9 +326,9 @@ nav a {
     margin-right: 1rem;
 }
 
-.footer-links a {
+.footer-links {
     text-decoration: none;
-    color: #fff;
+    color: black;
     margin-right: 20px;
     font-weight: bold;
 }
