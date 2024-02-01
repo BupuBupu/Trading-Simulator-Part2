@@ -82,8 +82,8 @@ def table_const(params):
     for i in range(len(stocks)):
         trades_per_vol.append(params["trades_per_vol"][i][0])
     
-    my_data["open_pr"]=open_pr
-    my_data["close_pr"]=close_pr
+    my_data["open"]=open_pr
+    my_data["close"]=close_pr
     my_data["daily_inc"]=daily_inc
     my_data["average"]=average
     my_data["trades_per_vol"]=trades_per_vol
@@ -99,7 +99,6 @@ def table_to_html(my_data, sort_based_on):
     
     header = my_data.columns.tolist()
     values = my_data.transpose().values.tolist()
-    print(header)
     col_to_color = header.index(sort_based_on+"\u2193")
     color='#FFD700'
     others='#FFFFCC'
@@ -108,10 +107,25 @@ def table_to_html(my_data, sort_based_on):
 
     fig = go.Figure(
         data=[
-            go.Table(header=dict(values=header),
-            cells=dict(values=values, fill_color=colors)
+            go.Table(header=dict(
+                values=header,
+                align=['center'],
+                font=dict(color='white', size=30),
+                height=70
+            ),
+            cells=dict(
+                values=values, 
+                align=['center'],
+                fill_color=colors,
+                font_size=25,
+                height=50
+            )
             )
         ]
     )
     my_script = pio.to_html(fig, full_html=False)
     return my_script
+
+params = filtered_data()
+df = table_const(params)
+table_to_html(df, "daily_inc")
